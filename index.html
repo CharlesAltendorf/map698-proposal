@@ -1,0 +1,90 @@
+<!--Code generated with help from ChatGPT 3/8/2025-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cincinnati Riverfront Revitalization</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100vw; height: 100vh; }
+        #slider-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="slider-container">
+        <label for="year-slider">Year: <span id="year-label">2011</span></label>
+        <input type="range" id="year-slider" min="2011" max="2024" step="1" value="2011">
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmxlc2FsdGVuZG9yZiIsImEiOiJjbGF6eDBodmwxY24yM3Bsbm41M24zeGFxIn0.Sf4kAiKT5mJkotGjkwID3Q';
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/charlesaltendorf/cm7zpufuc009e01ry9nnnf7bf',
+            center: [-84.5120, 39.1031], // Cincinnati coordinates
+            zoom: 14,
+            pitch: 60,  // 3D effect
+            bearing: 0
+        });
+
+        map.on('load', () => {
+            // 1️⃣ Default 3D Buildings Layer (Mapbox)
+            map.addLayer({
+                id: '3d-buildings',
+                source: 'composite',
+                'source-layer': 'building',
+                type: 'fill-extrusion',
+                paint: {
+                    'fill-extrusion-color': '#aaa',
+                    'fill-extrusion-height': ['get', 'height'],
+                    'fill-extrusion-opacity': 0.6
+                }
+            });
+
+            // 2️⃣ Custom Development Layer (Your GeoJSON)
+            map.addSource('development-data', {
+                type: 'vector',
+                url: 'mapbox://charlesaltendorf.1hqv4kmd'
+            });
+
+            map.addLayer({
+            id: 'development-layer',
+            type: 'fill-extrusion',
+            source: 'development-data',
+            'source-layer': 'Developments-7rhj1w',
+            paint: {
+                'fill-extrusion-color': '#ff6600',
+                'fill-extrusion-height': 50,
+                'fill-extrusion-opacity': 0.8
+            },
+            filter: ['<=', 'Year', 2011]
+            });
+
+        });
+
+        // 3️⃣ Slider to Filter Development Layer by Year
+        const slider = document.getElementById('year-slider');
+        const yearLabel = document.getElementById('year-label');
+
+        slider.addEventListener('input', function() {
+            const selectedYear = parseInt(slider.value);
+            yearLabel.textContent = selectedYear;
+
+            map.setFilter('development-layer', ['<=', 'Year', selectedYear]);
+        });
+    </script>
+</body>
+</html>
