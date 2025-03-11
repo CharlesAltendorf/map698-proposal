@@ -118,6 +118,36 @@ In this article, **Eriksson, et al (2015)** discuss the need for a tool that ena
 The article explains the process of creating stylesheets within Mapbox and deploying them for use in web browsers. However, the authors conclude that, while the tool is useful, it struggles with performance under heavy use, particularly with high GPU demands.
 Personally, I’ve noticed some minor slowdowns when using Mapbox, but considering the significant progress it has made over the past decade, I believe the ability to display 3D models in my project far outweighs these minor performance concerns.
 
+# Methodology
+
+## Project Area Definition used to generate charts and tables
+
+Initially, I intended to focus solely on Hamilton County Census Tract 265, as defined in the 2010 and 2020 censuses. This approach seemed ideal because the tract’s boundaries remained unchanged, and its population grew by approximately 1,000 during that period. The initial landing page users will see has these building changes in this tract 
+
+However, as Boyd pointed out in our first discussion, limiting the project area to a single census tract would not adequately capture its broader impact on the surrounding region. While obtaining population data and centroid locations from the 2010 and 2020 censuses was straightforward—the data is sorted by county and easily downloadable from the Census website—I found that working with the data to create graphs and visual representations proved more challenging. I initially expanded my dataset to include Boone (KY), Kenton (KY), Campbell (KY), and Hamilton (OH) counties, but this scope quickly became overwhelming for meaningful analysis.
+
+I also explored the IPUMS National Historical Geographic Information System, which provides census tract data and centroids for the 1990 and 2000 censuses. However, I again encountered the issue of scale—using all four counties for comparison felt excessive.
+
+So, how should I define the project area? Looking at the Hamilton County 2000 Census tract map inset for downtown Cincinnati, I noticed that the core area—potentially representing the city's central 15,000 residents—uses Interstate 75 as the western boundary and parts of Interstates 71 and 471 as the eastern boundary. This framework extends naturally across the river into Kentucky.
+
+The map CT39061_A01.pdf defines this core area as extending up to Liberty Street, roughly 1.3 miles north of the centerline of the Ohio River, encompassing 14 census tracts—eight of which are south of liberty Street. Extending the boundary roughly 1.3 miles south into Kentucky reaches 15th Street in Kenton County and 12th Street in Campbell county, incorporating four census tracts in Kenton County and six in Campbell County.
+
+This refined project area—19 (because I ended up adding tracts 3.01 and 3.02 from the 2000 census to make 2010 and 2020 look less misleading) census tracts spanning the core sections of all three counties—offers a more manageable dataset for producing bar graphs, pie charts, and other visual analyses using a very helpful QGIS plugin called data plotly.  
+![Data Plotly 1](pictures/dataplotly1.png)
+![Data Plotly 2](pictures/dataplotly2.png)
+
+After compling these centriods I was able to produce another map I was hoping to use as may main landing page using some bootstrap and leaflet code.  However it didn't seem to be very striking.  I was able to use leaflet to produe an interesting table effect that I did leave in my supporting aid images.
+
+![Centroids Map 1](pictures/centroidsmap1.png)
+![Centroids Map 2](pictures/centroidsmap2.png)
+
+## Developments Layer
+
+The Developments Layer was created by bringing in the building footprints layer from CAGIS and drawing the new developments over it.  Data for which developments to use was mostly fueled by visiting downtown Cincinnati website and filtering by residences and different types of restaurants.  From googled these places to confirm their website information, if they were still in business, and what year they opened.
+
+![CAGIS Building Footprints](pictures/CAGIS.png)
+![CAGIS Building Footprints](pictures/DevelopmentslayergenerationQGIS.png)
+
 # References
 
 ## Literature
@@ -141,7 +171,7 @@ Site-Design. (n.d.). Map. Site-Design. https://www.site-design.com/map/
 
 Topeka Riverfront Activation Plan. (n.d.). ArcGIS StoryMaps. Retrieved February 3, 2025, from https://storymaps.arcgis.com/stories/
 
-### Technologies
+### Peer Reviewed Techonologies Articles
 Balla, D., & Gede, M. (2024). Beautiful thematic maps in Leaflet with automatic data classification. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, XLVIII-4/W12, 3–10. https://doi.org/10.5194/isprs-archives-XLVIII-4-W12-2024-3-2024
 
 DataPlotly. (n.d.). Introduction. Read the Docs. Retrieved February 8, 2025, from https://dataplotly-docs.readthedocs.io/en/latest/intro.html
@@ -151,3 +181,18 @@ Duarte, L., Queirós, C., & Teodoro, A. (2021). Comparative analysis of QGIS plu
 Eriksson, O., & Rydkvist, E. (2015). An in-depth analysis of dynamically rendered vector-based maps with WebGL using Mapbox GL JS (Dissertation). Retrieved from https://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-121073
 
 Hu, S., & Dai, T. (2013). Online map application development using Google Maps API, SQL database, and ASP.NET. International Journal of Information and Communication Technology Research, 3(3), 103–113. https://citeseerx.ist.psu.edu/document?doi=dd73564eacf2cc2135a2f4375d44cf828704484d
+
+## Technologies
+
+Agafonkin, V. (2023). Leaflet (Version 1.9.3) [JavaScript library]. Retrieved from https://leafletjs.com
+
+Bootstrap. (2022). Bootstrap (Version 5.2.3) [CSS framework]. Retrieved from https://getbootstrap.com
+
+Kadlec, J. (2023). DataPlotly (Version 4.2) [QGIS Plugin]. Retrieved from https://plugins.qgis.org/plugins/DataPlotly/
+
+Mapbox. (2023). Mapbox Maps SDK (Version 3.0). Mapbox, Inc. https://www.mapbox.com
+
+QGIS Development Team. (2023). QGIS Geographic Information System (Version 3.32.3). Open Source Geospatial Foundation. https://qgis.org
+
+
+## Other data Sources
