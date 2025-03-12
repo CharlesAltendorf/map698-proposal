@@ -120,37 +120,105 @@ Personally, I’ve noticed some minor slowdowns when using Mapbox, but consideri
 
 # Methodology
 
-## Project Area Definition used to generate charts and tables
+## Project Area Definition
 
-Initially, I intended to focus solely on Hamilton County Census Tract 265, as defined in the 2010 and 2020 censuses. This approach seemed ideal because the tract’s boundaries remained unchanged, and its population grew by approximately 1,000 during that period. The initial landing page users will see has these building changes in this tract 
+The initial focus of this project was Hamilton County Census Tract 265, using data from the 2010 and 2020 censuses. The tract's boundaries remained consistent, and its population grew by approximately 1,000 during this period. The landing page for the user will primarily feature building changes within this area.
 
-However, as Boyd pointed out in our first discussion, limiting the project area to a single census tract would not adequately capture its broader impact on the surrounding region. While obtaining population data and centroid locations from the 2010 and 2020 censuses was straightforward—the data is sorted by county and easily downloadable from the Census website—I found that working with the data to create graphs and visual representations proved more challenging. I initially expanded my dataset to include Boone (KY), Kenton (KY), Campbell (KY), and Hamilton (OH) counties, but this scope quickly became overwhelming for meaningful analysis.
+However, upon feedback from Boyd, it became clear that limiting the scope to a single census tract wouldn’t fully capture the regional impact. Although population data and centroid locations from the 2010 and 2020 censuses were easily accessible, working with these datasets to generate meaningful visualizations posed a challenge. I initially extended the analysis to include surrounding counties (Boone, Kenton, Campbell, and Hamilton), but this broad scope proved overwhelming.
 
-I also explored the IPUMS National Historical Geographic Information System, which provides census tract data and centroids for the 1990 and 2000 censuses. However, I again encountered the issue of scale—using all four counties for comparison felt excessive.
+To refine the project area, I drew inspiration from the Hamilton County 2000 Census tract map, focusing on a core region extending along Interstate 75 in Cincinnati, encompassing 14 census tracts—eight south of Liberty Street, and additional tracts in Kentucky. This core region, spanning parts of Cincinnati and the Kentucky suburbs, offered a more manageable dataset and a clearer representation of the city’s evolution. 
 
-So, how should I define the project area? Looking at the Hamilton County 2000 Census tract map inset for downtown Cincinnati, I noticed that the core area—potentially representing the city's central 15,000 residents—uses Interstate 75 as the western boundary and parts of Interstates 71 and 471 as the eastern boundary. This framework extends naturally across the river into Kentucky.
+I used QGIS with the Data Plotly plugin to create bar graphs, pie charts, and other visualizations for this refined area. Here are two examples of those visualizations:
 
-The map CT39061_A01.pdf defines this core area as extending up to Liberty Street, roughly 1.3 miles north of the centerline of the Ohio River, encompassing 14 census tracts—eight of which are south of liberty Street. Extending the boundary roughly 1.3 miles south into Kentucky reaches 15th Street in Kenton County and 12th Street in Campbell county, incorporating four census tracts in Kenton County and six in Campbell County.
-
-This refined project area—19 (because I ended up adding tracts 3.01 and 3.02 from the 2000 census to make 2010 and 2020 look less misleading) census tracts spanning the core sections of all three counties—offers a more manageable dataset for producing bar graphs, pie charts, and other visual analyses using a very helpful QGIS plugin called data plotly.  
-![Data Plotly 1](pictures/dataplotly1.png)
+![Data Plotly 1](pictures/dataplotly1.png)  
 ![Data Plotly 2](pictures/dataplotly2.png)
-
-After compling these centriods I was able to produce another map I was hoping to use as may main landing page using some bootstrap and leaflet code.  However it didn't seem to be very striking.  I was able to use leaflet to produe an interesting table effect that I did leave in my supporting aid images.
-
-![Centroids Map 1](pictures/centroidsmap1.png)
-![Centroids Map 2](pictures/centroidsmap2.png)
 
 ## Developments Layer
 
-The Developments Layer was created by bringing in the building footprints layer from CAGIS and drawing the new developments over it.  Data for which developments to use was mostly fueled by visiting downtown Cincinnati website and filtering by residences and different types of restaurants.  From googled these places to confirm their website information, if they were still in business, and what year they opened.
+The Developments Layer was generated using building footprint data from CAGIS, which I combined with newly constructed or renovated buildings in the tract. Information about these new developments was sourced primarily from the Downtown Cincinnati website, where I filtered for residential and restaurant developments. I cross-referenced the data with online sources to verify the businesses’ existence and opening dates.
 
-![CAGIS Building Footprints](pictures/CAGIS.png)
-![CAGIS Building Footprints](pictures/DevelopmentslayergenerationQGIS.png)
+![CAGIS Building Footprints](pictures/CAGIS.png)  
+![Developments Layer in QGIS](pictures/DevelopmentslayergenerationQGIS.png)  
+![Downtown Cincinnati Website](pictures/DowntownCincinnati.png)
+
+## Landing Page with Mapbox Integration
+
+Based on further feedback, I chose to enhance the main landing page by integrating Mapbox’s 3D Buildings background layer, which provides a more dynamic and interactive experience. I uploaded the developments’ geojson file to Mapbox and applied a dark theme for better contrast. A slider was added to adjust the development years, with popups set up for future use.
+
+![Main Landing Map](pictures/3DMAP.png)  
+![Main Landing Source Code](pictures/sourcecode.png)
+
+Currently, the page is without CSS formatting, as I am still experimenting with alternatives to Bootstrap for styling. 
+
+## Interviews
+
+In addition to the map and visualizations, I decided to include interviews with long-term residents of the region to provide a personal perspective on its growth. I have secured two interviews so far and plan to conduct two more in the coming weeks. These interviews were recorded using my university’s Teams account, which ensures high-quality audio.
+
+The following steps were taken to process the audio files:
+
+1. Download the files from OneDrive  
+   ![Teams](pictures/OneDrive.png)
+2. Import the files into Audacity for sound extraction  
+   ![Audacity Import](pictures/AudacityImport.png)
+3. Export the audio as an MP3  
+   ![Audacity Export](pictures/AudacityExport.png)
+4. Upload the audio to Red Circle for podcast distribution  
+   ![Red Circle](pictures/RedCircle.png)
+
 
 # References
 
+## Data
+
+## Image Sources
+
+**1990Airview**
+
+Brand, L. (c. 1990). Aerial view of Cincinnati's riverfront [Color photograph]. Kenton County Public Library. https://facesandplaces.kentonlibrary.org/viewimage.php?i=di42170.
+
+**1999FortWashingWayConstruction**
+
+The Cincinnati Enquirer. (2023, May 16). Downtown Cincinnati [Photograph gallery]. Cincinnati.com. https://www.cincinnati.com/picture-gallery/news/2023/05/16/downtown-cincinnati/11599736002/.
+
+**2002RiverfrontStadiumDemolition**
+
+Cincinnati Reds. (2019, December 29). [2002RiverfrontStadiumDemolition] [Photograph]. Facebook. https://www.facebook.com/photo/?fbid=10158121723863760&set=pcb.10158121724443760.
+
+**2010AirView**
+
+Hood, K. D. (2010). Downtown Cincinnati 2010 [Photograph]. Wikipedia. https://en.wikipedia.org/wiki/File:Downtown_cincinnati_2010_kdh.jpg.
+
+**2015AirView**
+
+The Cincinnati Enquirer. (2015, July 12). All-Star week aerial photos [Photograph gallery]. Cincinnati.com. https://www.cincinnati.com/picture-gallery/sports/2015-all-star-game/2015/07/12/all-star-week-aerial-photos/30049489/.
+
+**2020AirView**
+
+Kalucci. (2020, June 3). Aerial Cincinnati, Ohio 🇺🇸4K Drone Footage [Video]. YouTube. https://www.youtube.com/watch?v=6uPsNS69P2A
+
+**2025AirView**
+
+Business View Publishing. (2025, Jan 2). Cincinnati, Ohio: A business view [Webpage]. Business View Magazine. https://businessviewmagazine.com/cincinnati-ohio/.
+
+## Interviews
+
+Schindler, B. (2025, March 10). Interview with Bob Schindler [Audio interview]. Red Circle. UR
+
+Schult, B. (2025, March 10). Interview with Bill Schult [Audio interview]. Red Circle. UR
+
 ## Literature
+
+### Peer Reviewed Techonologies Articles
+Balla, D., & Gede, M. (2024). Beautiful thematic maps in Leaflet with automatic data classification. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, XLVIII-4/W12, 3–10. https://doi.org/10.5194/isprs-archives-XLVIII-4-W12-2024-3-2024
+
+DataPlotly. (n.d.). Introduction. Read the Docs. Retrieved February 8, 2025, from https://dataplotly-docs.readthedocs.io/en/latest/intro.html
+
+Duarte, L., Queirós, C., & Teodoro, A. (2021). Comparative analysis of QGIS plugins for web maps creation. La Granja: Revista de Ciencias de la Vida, 34, 8–26. https://doi.org/10.17163/lgr.n34.2021.01
+
+Eriksson, O., & Rydkvist, E. (2015). An in-depth analysis of dynamically rendered vector-based maps with WebGL using Mapbox GL JS (Dissertation). Retrieved from https://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-121073
+
+Hu, S., & Dai, T. (2013). Online map application development using Google Maps API, SQL database, and ASP.NET. International Journal of Information and Communication Technology Research, 3(3), 103–113. https://citeseerx.ist.psu.edu/document?doi=dd73564eacf2cc2135a2f4375d44cf828704484d
+
 ### Professional Articles
 Durán Vian, F., Pons Izquierdo, J. J., & Serrano Martínez, M. (2021). River-city recreational interaction: A classification of urban riverfront parks and walks. Urban Forestry & Urban Greening, 59, 127042. https://doi.org/10.1016/j.ufug.2021.127042
 
@@ -171,20 +239,12 @@ Site-Design. (n.d.). Map. Site-Design. https://www.site-design.com/map/
 
 Topeka Riverfront Activation Plan. (n.d.). ArcGIS StoryMaps. Retrieved February 3, 2025, from https://storymaps.arcgis.com/stories/
 
-### Peer Reviewed Techonologies Articles
-Balla, D., & Gede, M. (2024). Beautiful thematic maps in Leaflet with automatic data classification. International Archives of Photogrammetry, Remote Sensing and Spatial Information Sciences, XLVIII-4/W12, 3–10. https://doi.org/10.5194/isprs-archives-XLVIII-4-W12-2024-3-2024
-
-DataPlotly. (n.d.). Introduction. Read the Docs. Retrieved February 8, 2025, from https://dataplotly-docs.readthedocs.io/en/latest/intro.html
-
-Duarte, L., Queirós, C., & Teodoro, A. (2021). Comparative analysis of QGIS plugins for web maps creation. La Granja: Revista de Ciencias de la Vida, 34, 8–26. https://doi.org/10.17163/lgr.n34.2021.01
-
-Eriksson, O., & Rydkvist, E. (2015). An in-depth analysis of dynamically rendered vector-based maps with WebGL using Mapbox GL JS (Dissertation). Retrieved from https://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-121073
-
-Hu, S., & Dai, T. (2013). Online map application development using Google Maps API, SQL database, and ASP.NET. International Journal of Information and Communication Technology Research, 3(3), 103–113. https://citeseerx.ist.psu.edu/document?doi=dd73564eacf2cc2135a2f4375d44cf828704484d
 
 ## Technologies
 
 Agafonkin, V. (2023). Leaflet (Version 1.9.3) [JavaScript library]. Retrieved from https://leafletjs.com
+
+Audacity Team. (2020). Audacity (Version 2.4.2) [Software]. https://audacityteam.org/
 
 Bootstrap. (2022). Bootstrap (Version 5.2.3) [CSS framework]. Retrieved from https://getbootstrap.com
 
@@ -192,7 +252,10 @@ Kadlec, J. (2023). DataPlotly (Version 4.2) [QGIS Plugin]. Retrieved from https:
 
 Mapbox. (2023). Mapbox Maps SDK (Version 3.0). Mapbox, Inc. https://www.mapbox.com
 
+Microsoft. (2025). Microsoft Teams (Version 1415/24120100221) [Computer software]. Microsoft Corporation.
+
+Microsoft. (2025). OneDrive [Web application]. Microsoft Corporation. Retrieved March 11, 2025, from https://onedrive.live.com/
+
+RedCircle. (2025). RedCircle podcast hosting and monetization platform. https://www.redcircle.com/
+
 QGIS Development Team. (2023). QGIS Geographic Information System (Version 3.32.3). Open Source Geospatial Foundation. https://qgis.org
-
-
-## Other data Sources
