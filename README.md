@@ -218,6 +218,8 @@ Downtown Cincinnati Inc. (2025). Downtown Cincinnati. Retrieved March 10, 2025, 
 
 Mapbox. (n.d.). 3D buildings layer. Mapbox. Retrieved March 10, 2025, from https://docs.mapbox.com/mapbox-gl-js/example/3d-buildings/
 
+U.S. Census Bureau. (2022). TIGER/Line Shapefiles 2022 [Data set]. U.S. Census Bureau. Retrieved March 10, 2025, from https://www2.census.gov/geo/tiger/TGRGDB22/
+
 Additional datasets were used to generate supporting visualizations but are not included in the final data folder as they are not part of the interactive map.
 
 ## Image Sources
