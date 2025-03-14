@@ -212,7 +212,13 @@ The following steps were taken to process the audio files:
 
 ## Data
 
+Cincinnati Area Geographic Information System (CAGIS). (March 28, 2018). Building footprints. CAGIS Open Data Portal. Retrieved March 10, 2025, from https://data-cagisportal.opendata.arcgis.com/datasets/c16cf953e9f24695b8b202219b300bcc_6/explore
 
+Downtown Cincinnati Inc. (2025). Downtown Cincinnati. Retrieved March 10, 2025, from https://downtowncincinnati.com/
+
+Mapbox. (n.d.). 3D buildings layer. Mapbox. Retrieved March 10, 2025, from https://docs.mapbox.com/mapbox-gl-js/example/3d-buildings/
+
+Additional datasets were used to generate supporting visualizations but are not included in the final data folder as they are not part of the interactive map.
 
 ## Image Sources
 
